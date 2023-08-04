@@ -72,7 +72,16 @@ const Chat = ({ sender, receiver, userMessages, arrivalMessage }) => {
       console.error(error);
     }
   };
+  const handleEmojiSelect = (emoji) => {
+    setInputChange((prevText) => prevText + emoji);
+  };
 
+  const handleKeyPress = (event) => {
+    if (event.keyCode === 13 || event.which === 13) {
+      // Replace this with the action you want to perform when Enter is pressed
+      sendMessage();
+    }
+  };
   return (
     <div className="chat-window">
       <div className="chat-header d-flex flex-row ">
@@ -112,7 +121,7 @@ const Chat = ({ sender, receiver, userMessages, arrivalMessage }) => {
       </div>
       <div></div>
       <div className="chat-input d-flex align-items-center ">
-        <EmojiBox />
+        <EmojiBox onEmojiSelect={handleEmojiSelect} />
         <div className="headico py-lg-3 d-flex justify-content-center align-items-center px-lg-3 mx-2">
           <i className="icon-paper-clip fs-5"></i>
         </div>
@@ -122,6 +131,7 @@ const Chat = ({ sender, receiver, userMessages, arrivalMessage }) => {
             type="text"
             value={inputChange}
             onChange={handleChange}
+            onKeyPress={handleKeyPress}
             placeholder="Type your message"
           />
         </div>

@@ -72,7 +72,6 @@ const Sidebar = ({ changeChat, arrivalMessages }) => {
               })
           )
         : [];
-
       console.log("Users data:", usersData);
       setUsers(usersData);
     } catch (error) {
@@ -108,7 +107,7 @@ const Sidebar = ({ changeChat, arrivalMessages }) => {
     }
   };
   return (
-    <div className="sidebar">
+    <div className="sidebar w-25">
       <div className="search-bar">
         <div className="search-bar-top d-flex">
           <div className="w-75">

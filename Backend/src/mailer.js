@@ -1,15 +1,14 @@
-import nodemailer from 'nodemailer';
-import Mailgen from 'mailgen';
-import dotenv from 'dotenv';
+import nodemailer from "nodemailer";
+import Mailgen from "mailgen";
+import dotenv from "dotenv";
 dotenv.config();
-
 
 /** Send email from real Gmail account */
 export const registerMail = async (req, res) => {
-  const { userName ,text} = req.body;
+  const { userName, text } = req.body;
 
   const config = {
-    service: 'gmail',
+    service: "gmail",
     auth: {
       user: process.env.EMAIL,
       pass: process.env.PASSWORD,
@@ -19,18 +18,17 @@ export const registerMail = async (req, res) => {
   const transporter = nodemailer.createTransport(config);
 
   const mailGenerator = new Mailgen({
-    theme: 'default',
+    theme: "default",
     product: {
-      name: 'Mailgen',
-      link: 'https://mailgen.js/',
+      name: "Chatify",
+      link: "https://chatify-smit.netlify.app/",
     },
   });
 
   const response = {
     body: {
-      name: 'Chatify',
-      intro : text,
-      outro: 'Looking forward to doing more business',
+      intro: text,
+      outro: " Welcome to our growing community of users! ",
     },
   };
 
@@ -39,14 +37,14 @@ export const registerMail = async (req, res) => {
   const message = {
     from: process.env.EMAIL,
     to: userName,
-    subject: 'Chatify is registered successfully',
+    subject: "Chatify is registered successfully",
     html: mail,
   };
 
   try {
     await transporter.sendMail(message);
     return res.status(201).json({
-      msg: 'You should receive an email shortly.',
+      msg: "You should receive an email shortly.",
     });
   } catch (error) {
     return res.status(500).json({ error });
