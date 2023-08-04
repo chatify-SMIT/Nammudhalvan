@@ -310,6 +310,7 @@ export async function sideData(req, res) {
       seen: last_element.seen,
       time: last_element.time,
       count: seenCount,
+      date: last_element.date,
     };
 
     return res.status(200).send(data);

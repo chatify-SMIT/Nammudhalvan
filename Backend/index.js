@@ -57,6 +57,7 @@ function setupSocketIO() {
           content: data.content,
           time: data.dataBlock.data.time,
           seen: data.dataBlock.data.seen,
+          date: data.dataBlock.data.date,
         });
       }
     });

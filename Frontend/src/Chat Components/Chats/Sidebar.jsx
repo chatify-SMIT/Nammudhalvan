@@ -53,11 +53,11 @@ const Sidebar = ({ changeChat, arrivalMessages }) => {
             a
               .filter((item) => item._id !== userId)
               .map(async (item) => {
-                const { seen, content, time, count } = await getsidedata(
+                const { seen, content, time, count, date } = await getsidedata(
                   userId,
                   item._id
                 );
-
+                console.log(date);
                 return {
                   id: item._id,
                   name: item.userName,
@@ -72,7 +72,7 @@ const Sidebar = ({ changeChat, arrivalMessages }) => {
               })
           )
         : [];
-      usersData.sort((a, b) => b.count - a.count);
+      usersData.sort((a, b) => new Date(a.date) - new Date(b.date));
       console.log("Users data:", usersData);
       setUsers(usersData);
     } catch (error) {

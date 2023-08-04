@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import moment from "moment-timezone";
 const MessageSchema = new mongoose.Schema({
   sender: {
     type: mongoose.Schema.Types.ObjectId,
@@ -21,6 +21,12 @@ const MessageSchema = new mongoose.Schema({
   seen: {
     type: Boolean,
     default: false,
+  },
+  date: {
+    type: Date,
+    default: function () {
+      return new Date();
+    },
   },
 });
 
