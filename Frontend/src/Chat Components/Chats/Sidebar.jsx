@@ -72,6 +72,7 @@ const Sidebar = ({ changeChat, arrivalMessages }) => {
               })
           )
         : [];
+      usersData.sort((a, b) => b.count - a.count);
       console.log("Users data:", usersData);
       setUsers(usersData);
     } catch (error) {
@@ -107,7 +108,7 @@ const Sidebar = ({ changeChat, arrivalMessages }) => {
     }
   };
   return (
-    <div className="sidebar w-25">
+    <div className="sidebar">
       <div className="search-bar">
         <div className="search-bar-top d-flex">
           <div className="w-75">
@@ -151,7 +152,9 @@ const Sidebar = ({ changeChat, arrivalMessages }) => {
                     user.count === 0 ? "last-message" : "last-messages"
                   }`}
                 >
-                  {user.content}
+                  {user.content && user.content.length > 25
+                    ? user.content.substring(0, 25) + "..."
+                    : user.content}
                 </div>
               </div>
               <div className={`${user.unread ? "unread" : ""}`}>

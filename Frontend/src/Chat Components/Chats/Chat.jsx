@@ -78,7 +78,6 @@ const Chat = ({ sender, receiver, userMessages, arrivalMessage }) => {
 
   const handleKeyPress = (event) => {
     if (event.keyCode === 13 || event.which === 13) {
-      // Replace this with the action you want to perform when Enter is pressed
       sendMessage();
     }
   };
