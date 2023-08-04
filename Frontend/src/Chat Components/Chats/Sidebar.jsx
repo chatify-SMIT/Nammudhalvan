@@ -68,11 +68,15 @@ const Sidebar = ({ changeChat, arrivalMessages }) => {
                   content: content,
                   time: time,
                   count: count,
+                  date: new Date(date).toISOString(),
                 };
               })
           )
         : [];
-      usersData.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+      // Sorting the usersData array based on the 'date' property in descending order (latest to oldest)
+      usersData.sort((a, b) => new Date(b.date) - new Date(a.date));
+
       console.log("Users data:", usersData);
       setUsers(usersData);
     } catch (error) {

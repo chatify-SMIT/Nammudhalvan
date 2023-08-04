@@ -22,6 +22,7 @@ function ChatBox() {
         sent: false,
         content: msg.content,
         time: msg.time,
+        users: msg.users,
       });
     });
     return () => {
@@ -42,6 +43,7 @@ function ChatBox() {
               content: message.content,
               time: message.time,
               sent: message.sent,
+              users: message.users,
             };
           });
           setUserMessages(userMessages);
@@ -55,7 +57,6 @@ function ChatBox() {
   const handleChatChange = (chat) => {
     setCurrentChat(chat);
   };
-
   return (
     <div className="d-flex w-100">
       <Sidebar changeChat={handleChatChange} arrivalMessages={arrivalMessage} />
@@ -64,7 +65,13 @@ function ChatBox() {
           sender={sender}
           receiver={currentChat}
           userMessages={userMessages}
-          arrivalMessage={arrivalMessage}
+          arrivalMessage={
+            arrivalMessage &&
+            (arrivalMessage.users[0] == currentChat ||
+              arrivalMessage.users[1] == currentChat)
+              ? arrivalMessage
+              : null
+          }
         />
       ) : (
         <DataBlank />

@@ -176,7 +176,14 @@ export async function getsidedata(sender, receiver) {
     const { time, seen, content, count, date } = response.data; // Assuming these properties are present in the response data.
     return { time, seen, content, count, date };
   } catch (error) {
-    return { time: null, seen: null, content: null, count: 0, date: null };
+    return {
+      time: null,
+      seen: null,
+      content: null,
+      count: 0,
+      date: null,
+      sender: null,
+    };
   }
 }
 

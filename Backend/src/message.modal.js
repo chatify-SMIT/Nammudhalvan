@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import moment from "moment-timezone";
+
 const MessageSchema = new mongoose.Schema({
   sender: {
     type: mongoose.Schema.Types.ObjectId,
@@ -13,9 +13,12 @@ const MessageSchema = new mongoose.Schema({
   time: {
     type: String,
     default: function () {
-      return new Date()
-        .toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-        .replace(" ", "");
+      const options = {
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: "Asia/Kolkata",
+      };
+      return new Date().toLocaleTimeString([], options).replace(" ", "");
     },
   },
   seen: {
@@ -23,9 +26,18 @@ const MessageSchema = new mongoose.Schema({
     default: false,
   },
   date: {
-    type: Date,
+    type: String,
     default: function () {
-      return new Date();
+      const options = {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZone: "Asia/Kolkata",
+      };
+      return new Date().toLocaleString([], options).replace(",", "");
     },
   },
 });
